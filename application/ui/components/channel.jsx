@@ -20,17 +20,13 @@ module.exports = React.createClass({
     propTypes : {
         localStorageKey : React.PropTypes.string.isRequired,
         onDestroy       : React.PropTypes.func.isRequired
-    },
+    }
 
     getInitialState : function()
     {
         return {
-            editing    : true,
-            emoji      : '100',
-            formData   : {},
-            muted      : false,
-            nowPlaying : null,
-            user       : {}
+            editing  : true,
+            formData : {}
         };
     },
 

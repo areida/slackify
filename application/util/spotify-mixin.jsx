@@ -11,6 +11,16 @@ var Mixin = module.exports = {
         dispatcher : React.PropTypes.object.isRequired
     },
 
+    getInitialState : function()
+    {
+        return {
+            emoji      : '100',
+            muted      : false,
+            nowPlaying : null,
+            user       : {}
+        };
+    },
+
     componentDidMount: function() {
         this.props.dispatcher.on('updateStatus', this.updateStatus);
     },
