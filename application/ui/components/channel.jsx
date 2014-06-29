@@ -82,7 +82,7 @@ module.exports = React.createClass({
                 {children}
             </div>
         );
-    d
+    },
 
     getEmojiOption : function(image, emoji)
     {
