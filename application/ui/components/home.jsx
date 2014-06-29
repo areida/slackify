@@ -15,9 +15,16 @@ module.exports = React.createClass({
         return {gridItems : this.getItemsFromStorage()};
     },
 
-    getItemsFromStorage : function()
+    render : function()
     {
-        return _.keys(global.localStorage);
+        return this.transferPropsTo(
+            <div>
+                <div className='controls'>
+                    <Button className='fa fa-plus' onClick={this.addChannel} title='Add Channel' />
+                </div>
+                {this.state.gridItems.map(this.getChannel)}
+            </div>
+        );
     },
 
     addChannel : function()
@@ -31,27 +38,21 @@ module.exports = React.createClass({
         });
     },
 
+    getItemsFromStorage : function()
+    {
+        return _.keys(global.localStorage);
+    },
+
     getChannel : function(key)
     {
         return this.transferPropsTo(
-            <Channel key={key} localStorageKey={key} onDestroy={this.updateGridItems} />
+            <Channel key={key} localStorageKey={key} onDestroy={this.updateItemsFromStorage} />
         );
     },
 
-    updateGridItems : function()
+    updateItemsFromStorage : function()
     {
         this.setState({gridItems : this.getItemsFromStorage()});
-    },
-
-    render : function()
-    {
-        return this.transferPropsTo(
-            <div>
-                <div className='controls'>
-                    <Button className='fa fa-plus' onClick={this.addChannel} title='Add Channel' />
-                </div>
-                {this.state.gridItems.map(this.getChannel)}
-            </div>
-        );
     }
+
 });

@@ -42,6 +42,49 @@ module.exports = React.createClass({
         });
     },
 
+    render : function()
+    {
+        var children  = [],
+            muteClass = this.state.muted ? 'fa-play' : 'fa-pause',
+            muteText  = this.state.muted ? 'Unmute'  : 'Mute';
+
+        if (this.state.editing)
+        {
+            children.push(<Input key='subdomain' label='Subdomain' value={this.state.subdomain} required={true} handleChange={this.handleSubdomainChange} />);
+            children.push(<Input key='token' label='Token' value={this.state.token} required={true} handleChange={this.handleTokenChange} />);
+            children.push(<Select key='emoji' label='Emoji' value={this.state.emoji} handleChange={this.handleEmojiChange} options={_.map(emojis, this.getEmojiOption)} />);
+            children.push(
+                <p key='actions'>
+                    <i className='fa fa-times' onClick={this.handleDestroy} title='Delete' />
+                    <i className='fa fa-save' onClick={this.handleUpdate} title='Save' />
+                </p>
+            );
+        }
+        else
+        {
+
+            children.push(<p key='subdomain'>Subdomain {this.state.subdomain}</p>);
+            children.push(<p key='token'>Token {this.state.token}</p>);
+            children.push(
+                <p key='emoji' className='emoji'>
+                    Emoji <img src={emojis[this.state.emoji]} title={this.state.emoji} />
+                </p>
+            );
+            children.push(
+                <p key='actions'>
+                    <i key='mute' className={'fa ' + muteClass} onClick={this.handleMute} title={muteText} />
+                    <i key='edit' className='fa fa-pencil' onClick={this.handleEdit} title='Edit' />
+                </p>
+            );
+        }
+
+        return this.transferPropsTo(
+            <div className='channel'>
+                {children}
+            </div>
+        );
+    d
+
     getEmojiOption : function(image, emoji)
     {
         return {
@@ -121,49 +164,6 @@ module.exports = React.createClass({
         return _.reduce(_.pluck(this.state.formData, 'validated'), function (memo, fieldValid) {
             return memo && (fieldValid === true);
         }, true);
-    },
-
-    render : function()
-    {
-        var children  = [],
-            muteClass = this.state.muted ? 'fa-play' : 'fa-pause',
-            muteText  = this.state.muted ? 'Unmute'  : 'Mute';
-
-        if (this.state.editing)
-        {
-            children.push(<Input key='subdomain' label='Subdomain' value={this.state.subdomain} required={true} handleChange={this.handleSubdomainChange} />);
-            children.push(<Input key='token' label='Token' value={this.state.token} required={true} handleChange={this.handleTokenChange} />);
-            children.push(<Select key='emoji' label='Emoji' value={this.state.emoji} handleChange={this.handleEmojiChange} options={_.map(emojis, this.getEmojiOption)} />);
-            children.push(
-                <p key='actions'>
-                    <i className='fa fa-times' onClick={this.handleDestroy} title='Delete' />
-                    <i className='fa fa-save' onClick={this.handleUpdate} title='Save' />
-                </p>
-            );
-        }
-        else
-        {
-
-            children.push(<p key='subdomain'>Subdomain {this.state.subdomain}</p>);
-            children.push(<p key='token'>Token {this.state.token}</p>);
-            children.push(
-                <p key='emoji' className='emoji'>
-                    Emoji <img src={emojis[this.state.emoji]} title={this.state.emoji} />
-                </p>
-            );
-            children.push(
-                <p key='actions'>
-                    <i key='mute' className={'fa ' + muteClass} onClick={this.handleMute} title={muteText} />
-                    <i key='edit' className='fa fa-pencil' onClick={this.handleEdit} title='Edit' />
-                </p>
-            );
-        }
-
-        return this.transferPropsTo(
-            <div className='channel'>
-                {children}
-            </div>
-        );
     }
 
 });
