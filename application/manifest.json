@@ -1,10 +1,10 @@
 {
   "AppName": {
-    "en": "Spotifybot"
+    "en": "Slackify"
   },
-  "BundleIdentifier": "spotifybot",
+  "BundleIdentifier": "Slackify",
   "AppDescription": {
-    "en": "An app for Slack webhook integration"
+    "en": "Share your tunes with your fellow slackers"
   },
   "AppIcon": {
     "18x18": "img/icons/icon-18x18.png",
