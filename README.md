@@ -7,7 +7,7 @@ Share your tunes with your fellow slackers.
 - `npm install`
 - `bower install`
 - `gulp watch` to compile the JavaScript app and start a webserver at `localhost:9001`
-- `gulp build production` to create a production relase
+- `gulp build --build=production` to create a production relase
 
 ## Installation Instructions
 1. Sign up for a [developer account on Spotify](https://devaccount.spotify.com/my-account/) by logging in and agreeing to the terms of use
