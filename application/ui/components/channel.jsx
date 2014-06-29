@@ -26,9 +26,9 @@ module.exports = React.createClass({
     {
         return {
             editing    : true,
-            emoji      : ':hex:',
+            emoji      : '100',
             formData   : {},
-            muted      : true,
+            muted      : false,
             nowPlaying : null,
             user       : {}
         };
@@ -95,11 +95,8 @@ module.exports = React.createClass({
 
     handleDestroy : function()
     {
-        if (confirm('Are you sure you want to delete this channel?'))
-        {
-            global.localStorage.removeItem(this.props.localStorageKey);
-            this.props.onDestroy();
-        }
+        global.localStorage.removeItem(this.props.localStorageKey);
+        this.props.onDestroy();
     },
 
     handleEdit : function()

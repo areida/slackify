@@ -2,12 +2,26 @@
 	margin : 0 2.5%;
 }
 
-.channel {
-	border        : 5px solid black;
+i {
+	cursor  : pointer;
+	opacity : .8;
+
+	&:hover {
+		opacity : 1;
+	};
+}
+
+.channels {
+	@include clearfix;
+}
+
+.channel {;
 	border-radius : 1em;
 	float         : left;
-	margin        : 2.5%;
-	padding       : 1%;
+	margin        : 1.5em;
+	padding       : 1em;
+
+	-webkit-box-shadow: 0 0 1em 0.25em black;
 	
 	@media #{$small-up} {
 		width : 95%;
@@ -33,13 +47,6 @@
 	}
 
 	i {
-		cursor  : pointer;
-		opacity : .8;
-
-		&:hover {
-			opacity : 1;
-		};
-
 		&:last-of-type {
 			float : right;
 		}

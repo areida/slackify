@@ -20,9 +20,11 @@ module.exports = React.createClass({
         return this.transferPropsTo(
             <div>
                 <div className='controls'>
-                    <Button className='fa fa-plus' onClick={this.addChannel} title='Add Channel' />
+                    <i className='fa fa-plus' onClick={this.addChannel} title='Add Channel' />
                 </div>
-                {this.state.gridItems.map(this.getChannel)}
+                <div className='channels'>
+                    {this.state.gridItems.map(this.getChannel)}
+                </div>
             </div>
         );
     },
