@@ -20,7 +20,7 @@ module.exports = React.createClass({
     propTypes : {
         localStorageKey : React.PropTypes.string.isRequired,
         onDestroy       : React.PropTypes.func.isRequired
-    }
+    },
 
     getInitialState : function()
     {
@@ -143,7 +143,7 @@ module.exports = React.createClass({
 
     handleUpdate : function()
     {
-        if (this.isFormValid())
+        if (this.isValid())
         {
             this.setState({
                 editing : false
@@ -151,7 +151,7 @@ module.exports = React.createClass({
         }
     },
 
-    isFormValid : function()
+    isValid : function()
     {
         return _.reduce(_.pluck(this.state.formData, 'validated'), function (memo, fieldValid) {
             return memo && (fieldValid === true);
