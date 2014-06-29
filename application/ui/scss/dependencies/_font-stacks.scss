@@ -1,0 +1,52 @@
+@font-face {
+	font-family: 'antartida-rounded-mediumregular';
+	src: url('/fonts/antartidarounded-medium/Antartida-Rounded-medium-webfont.eot');
+	src: url('/fonts/antartidarounded-medium/Antartida-Rounded-medium-webfont.eot?#iefix') format('embedded-opentype'),
+		 url('/fonts/antartidarounded-medium/Antartida-Rounded-medium-webfont.woff') format('woff'),
+		 url('/fonts/antartidarounded-medium/Antartida-Rounded-medium-webfont.ttf') format('truetype'),
+		 url('/fonts/antartidarounded-medium/Antartida-Rounded-medium-webfont.svg#antartida_rounded_lightRg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'FontAwesome';
+	src: url('/fonts/fontawesome-webfont.eot');
+	src: url('/fonts/fontawesome-webfont.woff') format('woff'),
+		 url('/fonts/fontawesome-webfont.ttf') format('truetype'),
+		 url('/fonts/fontawesome-webfont.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+// var
+
+$ff-font-awesome: "FontAwesome";
+
+$ff-ant-medium: "antartida-rounded-mediumregular", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+// var
+
+$ff-georgia: "Georgia", "Times New Roman", Times, serif;
+
+// semantic font stack names
+
+// serif stack
+
+$ff-serif  :  $ff-georgia;
+
+.ff-serif {
+	font-family  :  $ff-georgia;
+}
+
+// sans serif stack
+
+$ff-sans : $ff-ant-medium;
+
+.ff-sans {
+	font-family: $ff-sans;
+}
+
+[class*='fa '] {
+	font-family: $ff-font-awesome;
+}

@@ -1,0 +1,36 @@
+// prototype: http://www.puppies.com.php54-2.ord1-1.websitetestlink.com/style-guide/
+
+// dependencies
+
+	@import "dependencies/colors";
+	@import "dependencies/font-stacks";
+	@import "layout/z-indexes";
+
+// vendor imports
+
+	// foundation
+
+	@import "normalize";
+	@import "foundation-settings";
+	@import "foundation";
+
+	// bourbon
+
+	@import "bourbon-settings";
+
+// layout
+
+	@import "layout/regions";
+	@import "layout/layout-utilities";
+	@import "layout/content-layouts";
+
+// states
+
+	@import "states/ui-states";
+
+// pages
+
+	@import "pages/home";
+
+// Font Awesome
+	@import "font-awesome";

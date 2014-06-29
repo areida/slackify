@@ -1,0 +1,69 @@
+.controls {
+	margin : 0 2.5%;
+}
+
+.channel {
+	border        : 5px solid black;
+	border-radius : 1em;
+	float         : left;
+	margin        : 2.5%;
+	padding       : 1%;
+	
+	@media #{$small-up} {
+		width : 95%;
+	}
+	
+	@media #{$medium-up} {
+		width : 28%;
+	}
+	
+	@media #{$large-up} {
+		width : 20%;
+	}
+
+	.label.label--select,
+	.label.label--text {
+		span {
+			display : none;
+		}
+	}
+
+	.h2 {
+		text-transform : capitalize;
+	}
+
+	i {
+		cursor  : pointer;
+		opacity : .8;
+
+		&:hover {
+			opacity : 1;
+		};
+
+		&:last-of-type {
+			float : right;
+		}
+	}
+
+	img {
+		float  : right;
+		height : 1.25em;
+	}
+
+	p {
+		span:first-of-type {
+			font-variant   : small-caps;
+			text-transform : lowercase;
+		}
+
+		&:last-of-type {
+			line-height : 1.5em;
+		}
+
+		&:not(.emoji) {
+			span:last-of-type {
+				float : right;
+			}	
+		}
+	}
+}

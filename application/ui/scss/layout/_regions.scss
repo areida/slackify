@@ -1,0 +1,88 @@
+// **************************************************
+// **************************************************
+
+	// Layout for app-wide regtions
+	// Ex: header, footer, main, sidebar, app width
+
+// **************************************************
+// **************************************************
+
+html,
+body,
+.layout--app-wrapper {
+	height  :  100%;
+	margin: 0;
+	padding: 0;
+}
+
+// global max width of app
+
+.layout--max-width {
+	max-width  :  rem-calc(1140);
+	margin     :  auto;
+	position   :  relative;
+}
+
+// header layout
+
+.layout--header {
+	height     :  auto;
+	position   :  relative;
+	top        :  auto;
+	right      :  auto;
+	bottom     :  auto;
+	left       :  auto;
+	z-index    :  $header-mobile-index;
+	text-align :  center;
+}
+
+// sticky footer
+// http://css-tricks.com/snippets/css/sticky-footer/
+
+$footerHeight  :  60px;
+$footerMobileHeight: 80px;
+
+.layout--page-wrap {
+	min-height     :  100%;
+	height         :  auto !important;
+	height         :  100%;
+	margin-bottom  :  (-$footerMobileHeight);
+
+	@media #{$large-up} {
+		margin-bottom  :  (-$footerHeight);
+	}
+
+
+}
+
+.layout--push {
+	height  :  $footerMobileHeight;
+
+	@media #{$large-up} {
+		height  :  $footerHeight;
+	}
+
+}
+
+.layout--footer {
+	height   :  $footerMobileHeight;
+	clear    :  both;
+	position :  relative;
+
+	@media #{$large-up} {
+		height  :  $footerHeight;
+	}
+
+}
+
+// content region
+
+.layout--content {
+	padding-top     :  rem-calc(60); // header height
+	padding-bottom  :  0;
+
+	@media #{$large-up} {
+		padding-top  :  rem-calc(30);
+	}
+
+}

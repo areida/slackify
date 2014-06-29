@@ -1,0 +1,164 @@
+// **************************************************
+// **************************************************
+
+	// UI states of global app
+	// Ex: mobile navigation,
+	// account navigaton (active or inactive)
+
+// **************************************************
+// **************************************************
+
+/////////////////////////////////////////////////////
+// default element states
+/////////////////////////////////////////////////////
+
+// nav main default
+
+.ui-state__nav__main {
+	width     :  75%;
+	position  :  fixed;
+	top       :  rem-calc(60); // same as header height
+	bottom    :  0;
+	left      :  -75%;
+
+	@include transition( left .1s $ease-in-out-quad );
+
+	@media #{$medium-up} {
+		width  :  40%;
+	}
+
+	@media #{$large-up} {
+		width     :  auto;
+		position  :  static;
+		z-index   :  $nav-main-index;
+	}
+
+}
+
+// account nav default state
+
+.ui-state__nav__account {
+	display  :  none;
+
+	@media #{$large-up} {
+		display  :  block;
+	}
+
+}
+
+// content default
+
+.ui-state__content {
+	width: 100%;
+	@include transition( margin-left .1s $ease-in-out-quad );
+
+	@media #{$large-up} {
+		width  :  auto;
+	}
+
+}
+
+/////////////////////////////////////////////////////
+// default global ui state
+/////////////////////////////////////////////////////
+
+.ui-state--default {
+	overflow  :  auto;
+}
+
+/////////////////////////////////////////////////////
+// global state of mobile main navigation
+/////////////////////////////////////////////////////
+
+.ui-state--nav-main--active {
+	overflow  :  hidden;
+
+	@media #{$large-up} {
+		overflow  :  visible;
+	}
+
+	// slide main nav in on mobile
+
+	.ui-state__nav__main {
+		left  :  0;
+
+		@media #{$large-up} {
+			left  :  auto;
+		}
+
+	}
+
+	// active mobile nav trigger state
+
+	.ui-state__nav__main-mobile-trigger {
+		background-color  :  rgba($black, .2);
+	}
+
+	// slide content out on mobile
+
+	.ui-state__content {
+		margin-left  :  75%;
+
+		@media #{$medium-up} {
+			margin-left  :  40%;
+		}
+
+		@media #{$large-up} {
+			margin-left  :  auto;
+		}
+
+	}
+
+}
+
+/////////////////////////////////////////////////////
+// global state of mobile account navigation
+/////////////////////////////////////////////////////
+
+.ui-state--account-nav--active {
+	overflow  :  hidden;
+
+	@media #{$large-up} {
+		overflow  :  visible;
+	}
+
+	.ui-state__nav__account {
+		display  :  block;
+		z-index  :  $nav-account-mobile-index;
+
+		@media #{$large-up} {
+			z-index  :  $nav-account-index;
+		}
+	}
+
+	.ui-state__nav__account-mobile-trigger {
+		background-color  :  rgba($black, .2);
+	}
+
+}
+
+/////////////////////////////////////////////////////
+// clear global state of main and account menus
+/////////////////////////////////////////////////////
+
+.ui-state--nav-main--active,
+.ui-state--account-nav--active {
+
+	.ui-state__clear-menus {
+		position    :  fixed;
+		top         :  rem-calc(60);
+		right       :  0;
+		bottom      :  0;
+		left        :  0;
+		z-index     :  $clear-menu-index;
+		background : rgba($black, .5);
+
+		@include transition( background-color .2s ease );
+
+		@media #{$large-up} {
+			display  :  none;
+		}
+
+	}
+
+}

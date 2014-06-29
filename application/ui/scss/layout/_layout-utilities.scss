@@ -1,0 +1,157 @@
+// all margins
+
+.layout--m-default {
+	margin  :  rem-calc(0 0 30 0);
+}
+
+.layout--m-half {
+	margin  :  rem-calc(15) !important;
+}
+
+.layout--m-3 {
+	margin  :  rem-calc(3) !important;
+}
+
+.layout--m-6 {
+	margin  :  rem-calc(6) !important;
+}
+
+.layout--m-top-half {
+	margin-top  :  rem-calc(15) !important;
+}
+
+// top margins
+
+.layout--m-top-3 {
+	margin-top  :  rem-calc(3) !important;
+}
+
+.layout--m-top-6 {
+	margin-top  :  rem-calc(6) !important;
+}
+
+.layout--m-top-15 {
+	margin-top  :  rem-calc(15) !important;
+}
+
+.layout--m-top-21 {
+	margin-top  :  rem-calc(21) !important;
+}
+
+.layout--m-top-30 {
+	margin-top  :  rem-calc(30) !important;
+}
+
+.layout--m-top-45 {
+	margin-top  :  rem-calc(45) !important;
+}
+
+.layout--m-top-60 {
+	margin-top  :  rem-calc(60) !important;
+}
+
+// bottom margins
+
+.layout--m-bot-default {
+	margin-bottom  :  rem-calc(30) !important;
+}
+
+.layout--m-bot-0 {
+	margin-bottom  :  0 !important;
+}
+
+.layout--m-bot-3 {
+	margin-bottom  :  rem-calc(3) !important;
+}
+
+.layout--m-bot-6 {
+	margin-bottom  :  rem-calc(6) !important;
+}
+
+.layout--m-bot-9 {
+	margin-bottom  :  rem-calc(9) !important;
+}
+
+.layout--m-bot-half,
+.layout--m-bot-15 {
+	margin-bottom  :  rem-calc(15) !important;
+}
+
+.layout--m-bot-30 {
+	margin-bottom  :  rem-calc(30) !important;
+}
+
+.layout--m-bot-none {
+	margin-bottom  :  rem-calc(0) !important;
+}
+
+// right margins
+
+.layout--m-right-6 {
+	margin-right  :  rem-calc(6) !important;
+}
+
+.layout--m-right-15 {
+	margin-right  :  rem-calc(15) !important;
+}
+
+
+// left margins
+
+.layout--m-left-0 {
+	margin-left  :  0 !important;
+}
+
+.layout--m-left-3 {
+	margin-left  :  rem-calc(3) !important;
+}
+
+.layout--m-left-half,
+.layout--m-left-15 {
+	margin-left  :  rem-calc(15) !important;
+}
+
+// zero out margins
+
+.layout--no-margin {
+	margin  :  0 !important;
+}
+
+// zero out padding
+
+.layout--no-padding {
+	padding  :  0 !important;
+}
+
+// all padding
+
+.layout--p-3 {
+	padding  :  rem-calc(3);
+}
+
+// display properties
+
+.layout--block {
+	display  :  block;
+}
+
+// change display on properties at different resolutions
+
+.layout--expand-on-small {
+
+	@media #{$small-only} {
+		width       :  100%;
+		min-width   :  auto;
+		display     :  block;
+		text-align  :  center;
+	}
+
+}
+
+// collapsed grid helpers
+
+// gap out 10px
+
+.column-adjust--m-5 {
+	margin  :  rem-calc(5);
+}

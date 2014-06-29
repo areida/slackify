@@ -1,0 +1,68 @@
+// Non semantic names. DON'T USE
+
+// browns
+
+$brown-dark           :  #352323;
+$brown-medium         :  #7b6b6b;
+$brown-light          :  #9a9191;
+$brown-tan            :  #c8c2b7;
+$brown-light-tan      :  #e9e5d9;
+$brown-light-tan-tint :  #edebe7;
+
+// alternate colors
+
+$green                :  #7e855c;
+$red                  :  #861b19;
+
+// Semantic name. USE
+
+// gray values
+
+$gray-light: #E6E2E2;
+
+// values
+
+$white                :  #ffffff;
+$light-tint           :  #f6f6f5;
+$black                :  #000000;
+
+// passive colors
+
+$passive-dark              :  $brown-dark;
+$passive-medium            :  $brown-medium;
+$passive-light             :  $brown-light;
+$passive-muted             :  $brown-tan;
+$passive-muted-light       :  $brown-light-tan;
+$passive-muted-light-tint  :  $brown-light-tan-tint;
+
+// color theme
+
+$primary              :  #5c9a99; // medium blue
+$primary-dark         :  #3e6174; // dark blue
+$primary-light        :  #bed3ca; // light blue
+$primary-medium       :  #5c9a99;
+$primary-alt          :  #612840; // purple
+$secondary            :  #cd6727; // orange
+$tertiary             :  #feae00; // yellow
+
+// status colors
+
+$positive             :  $green;
+$warning              :  $red;
+
+// third party colors
+
+$facebook-blue  :  #314a7b;
+$pinterest-red  :  #bf0031;
+
+// breed colors
+
+$breed-black   :  #1d1c21;
+$breed-white   :  #f2f0f1;
+$breed-brown   :  #4f3029;
+$breed-red     :  #6a180e;
+$breed-gold    :  #a7622e;
+$breed-yellow  :  #cb955d;
+$breed-cream   :  #dccdbe;
+$breed-blue    :  #626065;
+$breed-gray    :  #adacb5;

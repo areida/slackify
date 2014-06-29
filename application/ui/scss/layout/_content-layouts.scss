@@ -1,0 +1,31 @@
+// **************************************************
+// **************************************************
+
+	// Content layout components
+
+// **************************************************
+// **************************************************
+
+// base calculations from mockups: 1112px;
+
+// Vars
+
+$base: 1112;
+
+// Defaults
+
+.layout--content {
+	position  :  relative;
+	z-index   :  1;
+
+	@include clearfix;
+}
+
+// sub content
+// white content area
+
+.content__sub {
+	padding     :  rem-calc(30 0);
+	margin      :  rem-calc(30 0 0);
+	background  :  $white;
+}
