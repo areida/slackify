@@ -8,7 +8,7 @@ var Button   = require('./buttons/button');
 var Channel  = require('./channel');
 
 module.exports = React.createClass({
-    displayName : 'Home',
+    displayName : 'Channels',
 
     getInitialState : function()
     {
@@ -48,7 +48,7 @@ module.exports = React.createClass({
     getChannel : function(key)
     {
         return this.transferPropsTo(
-            <Channel key={key} localStorageKey={key} onDestroy={this.updateItemsFromStorage} />
+            <Channel key={key} onDestroy={this.updateItemsFromStorage} />
         );
     },
 

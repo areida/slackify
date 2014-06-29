@@ -1,17 +1,16 @@
 /** @jsx React.DOM */
 'use strict';
 
-var React = require('react');
-var Home  = require('../components/home');
+var React    = require('react');
+var Channels = require('../components/channels');
 
 module.exports = React.createClass({
-
-    displayName : 'HomePage',
+    displayName : 'Home',
 
     render : function()
     {
         return (this.transferPropsTo(
-            <Home />
+            <Channels />
         ));
     }
 });
