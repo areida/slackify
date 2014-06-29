@@ -1,5 +1,6 @@
 Slackify
 ============
+Share your tunes with your fellow slackers.
 
 ## Setup
 
@@ -8,7 +9,7 @@ Slackify
 - `gulp watch` to compile the JavaScript app and start a webserver at `localhost:9001`
 - `gulp build production` to create a production relase
 
-## Installation Instruction
+## Installation Instructions
 1. Sign up for a [developer account on Spotify](https://devaccount.spotify.com/my-account/) by logging in and agreeing to the terms of use
 1. Create the Spotify folder if it doesn't exist already: `~/Spotify` (Mac OS X and Linux) or `My Documents\Spotify` (Windows)
 1. Download the latest version [here](https://github.com/areida/slackify) and unzip it into ~/Spotify/slackify
