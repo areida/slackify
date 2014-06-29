@@ -58,8 +58,6 @@ i {
 	}
 
 	p {
-		@include clearfix;
-
 		span:first-of-type {
 			font-variant   : small-caps;
 			text-transform : lowercase;
