@@ -33,8 +33,7 @@
     "node-sass": "~0.7.0",
     "reactify": "^0.13.1",
     "vinyl-source-stream": "^0.1.1",
-    "watchify": "^0.10.2",
-    "request": "git://github.com/mikeal/request.git#83dfba3db19eab6f61367aeacae850d0a7b92d26"
+    "watchify": "^0.10.2"
   },
   "dependencies": {
     "underscore": "^1.6.0",
@@ -46,7 +45,6 @@
     "q": "^1.0.1",
     "moment": "^2.7.0",
     "react-nested-router": "~0.1.0",
-    "react-localstorage": "~0.0.1",
     "font-awesome" : "~4.1.0"
   }
 }

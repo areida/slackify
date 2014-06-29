@@ -1,11 +1,10 @@
 /** @jsx React.DOM */
 'use strict';
 
-var React             = require('react');
-var LocalStorageMixin = require('react-localstorage');
-var SpotifyMixin      = require('../../util/spotify-mixin');
-var _                 = require('underscore');
-var $                 = require('jquery');
+var React        = require('react');
+var SpotifyMixin = require('../../util/spotify-mixin');
+var _            = require('underscore');
+var $            = require('jquery');
 
 var emojis = require('../../util/emojis');
 var Forms  = require('./forms');
@@ -15,11 +14,12 @@ var Select = Forms.Select;
 
 module.exports = React.createClass({
     displayName : 'Channel',
-    mixins      : [LocalStorageMixin, SpotifyMixin],
+    mixins      : [SpotifyMixin],
 
     propTypes : {
-        localStorageKey : React.PropTypes.string.isRequired,
-        onDestroy       : React.PropTypes.func.isRequired
+        key       : React.PropTypes.string.isRequired,
+        onDestroy : React.PropTypes.func.isRequired,
+        user      : React.PropTypes.object.isRequired
     },
 
     getInitialState : function()
@@ -32,6 +32,13 @@ module.exports = React.createClass({
 
     componentDidMount : function()
     {
+        var storage = global.localStorage.getItem(this.props.key);
+
+        if (storage)
+        {
+            this.setState($.parseJSON(storage));
+        }
+
         this.setState({
             user : _.clone(this.props.user)
         });
@@ -91,7 +98,7 @@ module.exports = React.createClass({
 
     handleDestroy : function()
     {
-        global.localStorage.removeItem(this.props.localStorageKey);
+        global.localStorage.removeItem(this.props.key);
         this.props.onDestroy();
     },
 
@@ -143,11 +150,15 @@ module.exports = React.createClass({
 
     handleUpdate : function()
     {
+        var state = _.clone(this.state);
+
         if (this.isValid())
         {
-            this.setState({
-                editing : false
-            });
+            state.editing = false;
+
+            this.setState(state);
+
+            global.localStorage.setItem(this.props.key, JSON.stringify(state));
         }
     },
 
