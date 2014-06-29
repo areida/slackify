@@ -21,7 +21,8 @@ var Mixin = module.exports = {
         };
     },
 
-    componentDidMount: function() {
+    componentDidMount: function()
+    {
         this.props.dispatcher.on('updateStatus', this.updateStatus);
     },
 

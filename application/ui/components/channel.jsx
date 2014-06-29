@@ -73,7 +73,7 @@ module.exports = React.createClass({
             );
         }
 
-        return this.transferPropsTo(
+        return (
             <div className='channel'>
                 {children}
             </div>

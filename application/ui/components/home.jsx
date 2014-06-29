@@ -17,7 +17,7 @@ module.exports = React.createClass({
 
     render : function()
     {
-        return this.transferPropsTo(
+        return (
             <div>
                 <div className='controls'>
                     <i className='fa fa-plus' onClick={this.addChannel} title='Add Channel' />
