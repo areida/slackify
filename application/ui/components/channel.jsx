@@ -30,7 +30,6 @@ module.exports = React.createClass({
             formData   : {},
             muted      : true,
             nowPlaying : null,
-            saving     : false,
             user       : {}
         };
     },
