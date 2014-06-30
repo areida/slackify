@@ -21,13 +21,9 @@ gulp.task('html', function() {
         .pipe(gulp.dest('./build'))
         .pipe(connect.reload());
 
-    if (gutil.env.build == 'production')
-    {
-
-        gulp.src([
-                './application/index.js'
-            ])
-            .pipe(gulp.dest('./build/js'))
-            .pipe(connect.reload());
-    }
+    gulp.src([
+            './application/index.js'
+        ])
+        .pipe(gulp.dest('./build/js'))
+        .pipe(connect.reload());
 });
