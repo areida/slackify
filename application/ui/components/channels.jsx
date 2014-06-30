@@ -7,12 +7,24 @@ var _     = require('underscore');
 var Button   = require('./buttons/button');
 var Channel  = require('./channel');
 
+var DB = require('../../db/slackify-v1');
+
 module.exports = React.createClass({
     displayName : 'Channels',
 
     getInitialState : function()
     {
-        return {gridItems : this.getItemsFromStorage()};
+        return {channels : []};
+    },
+
+    componentWillMount : function()
+    {
+        this.db = new DB();
+    },
+
+    componentDidMount : function()
+    {
+        this.getChannelsFromStorage();
     },
 
     render : function()
@@ -23,7 +35,7 @@ module.exports = React.createClass({
                     <i className='fa fa-plus' onClick={this.addChannel} title='Add Channel' />
                 </div>
                 <div className='channels'>
-                    {this.state.gridItems.map(this.getChannel)}
+                    {this.state.channels.map(this.getChannel)}
                 </div>
             </div>
         );
@@ -31,30 +43,43 @@ module.exports = React.createClass({
 
     addChannel : function()
     {
-        var items = _.clone(this.state.gridItems);
+        var channels = _.clone(this.state.channels),
+            key      = new Date().getTime(),
+            self     = this;
 
-        items.push('channel-' + new Date().getTime());
+        channels.push(key);
 
-        this.setState({
-            gridItems : items
+        this.db.insert('channel', [{key : key}], function() {
+            self.setState({channels : channels});
         });
-    },
-
-    getItemsFromStorage : function()
-    {
-        return _.keys(global.localStorage);
     },
 
     getChannel : function(key)
     {
         return this.transferPropsTo(
-            <Channel key={key} onDestroy={this.updateItemsFromStorage} />
+            <Channel key={key} onDestroy={this.removeChannel} />
         );
     },
 
-    updateItemsFromStorage : function()
+    getChannelsFromStorage : function()
     {
-        this.setState({gridItems : this.getItemsFromStorage()});
+        this.db.selectAll('channel', this.updateChannelsFromStorage);
+    },
+
+    removeChannel : function(channel)
+    {
+        var channels = _.clone(this.state.channels);
+
+        this.setState({channels : _.without(channels, channel)});
+    },
+
+    updateChannelsFromStorage : function(channel)
+    {
+        var channels = _.clone(this.state.channels);
+
+        channels.push(channel.key);
+
+        this.setState({channels : channels});
     }
 
 });

@@ -1,20 +1,22 @@
 /** @jsx React.DOM */
 'use strict';
 
-var React        = require('react');
-var SpotifyMixin = require('../../util/spotify-mixin');
-var _            = require('underscore');
-var $            = require('jquery');
+var $     = require('jquery');
+var _     = require('underscore');
+var React = require('react');
+var Slack = require('../../util/slack');
 
-var emojis = require('../../util/emojis');
+var Emojis = require('../../util/emojis');
 var Forms  = require('./forms');
 var Form   = Forms.Form;
 var Input  = Forms.Input;
 var Select = Forms.Select;
 
+var DB = require('../../db/slackify-v1');
+
 module.exports = React.createClass({
     displayName : 'Channel',
-    mixins      : [SpotifyMixin],
+    mixins      : [Slack],
 
     propTypes : {
         key       : React.PropTypes.string.isRequired,
@@ -26,21 +28,25 @@ module.exports = React.createClass({
     {
         return {
             editing  : true,
-            formData : {}
+            formData : {},
+            loading  : true
         };
+    },
+
+    componentWillMount : function()
+    {
+        this.db = new DB();
     },
 
     componentDidMount : function()
     {
-        var storage = global.localStorage.getItem(this.props.key);
+        var self = this;;
 
-        if (storage)
-        {
-            this.setState($.parseJSON(storage));
-        }
+        this.db.select('channel', this.props.key, function(state) {
+            state.loading = false;
+            state.user    = _.clone(self.props.user);
 
-        this.setState({
-            user : _.clone(this.props.user)
+            self.setState(state);
         });
     },
 
@@ -50,11 +56,15 @@ module.exports = React.createClass({
             muteClass = this.state.muted ? 'fa-play' : 'fa-pause',
             muteText  = this.state.muted ? 'Unmute'  : 'Mute';
 
-        if (this.state.editing)
+        if (this.state.loading)
+        {
+            children.push(<p key='loading' className='loading-spinner'><i className='fa fa-spinner fa-spin' /></p>)
+        }
+        else if (this.state.editing)
         {
             children.push(<Input key='subdomain' label='Subdomain' value={this.state.subdomain} required={true} handleChange={this.handleSubdomainChange} />);
             children.push(<Input key='token' label='Token' value={this.state.token} required={true} handleChange={this.handleTokenChange} />);
-            children.push(<Select key='emoji' label='Emoji' value={this.state.emoji} handleChange={this.handleEmojiChange} options={_.map(emojis, this.getEmojiOption)} />);
+            children.push(<Select key='emoji' label='Emoji' value={this.state.emoji} handleChange={this.handleEmojiChange} options={_.map(Emojis, this.getEmojiOption)} />);
             children.push(
                 <p key='actions'>
                     <i className='fa fa-times' onClick={this.handleDestroy} title='Delete' />
@@ -69,7 +79,7 @@ module.exports = React.createClass({
             children.push(<p key='token'>Token {this.state.token}</p>);
             children.push(
                 <p key='emoji' className='emoji'>
-                    Emoji <img src={emojis[this.state.emoji]} title={this.state.emoji} />
+                    Emoji <img src={Emojis[this.state.emoji]} title={this.state.emoji} />
                 </p>
             );
             children.push(
@@ -98,8 +108,11 @@ module.exports = React.createClass({
 
     handleDestroy : function()
     {
-        global.localStorage.removeItem(this.props.key);
-        this.props.onDestroy();
+        var self = this;
+
+        this.db.delete('channel', this.props.key, function() {
+            self.props.onDestroy(self.props.key);
+        });
     },
 
     handleEdit : function()
@@ -150,15 +163,18 @@ module.exports = React.createClass({
 
     handleUpdate : function()
     {
-        var state = _.clone(this.state);
+        var self  = this,
+            state = _.clone(this.state);
 
         if (this.isValid())
         {
             state.editing = false;
 
-            this.setState(state);
-
-            global.localStorage.setItem(this.props.key, JSON.stringify(state));
+            this.db.update('channel', this.props.key, state, function() {
+                self.setState(state);
+            }, function(event) {
+                console.log(event);
+            });
         }
     },
 

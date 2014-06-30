@@ -7,7 +7,7 @@ var React       = require('react');
 var dispatcher  = require('synapse-common/lib/dispatcher');
 
 var SiteLayout = require('./ui/layouts/site');
-var HomePage   = require('./ui/pages/home');
+var Channels   = require('./ui/components/channels');
 
 window.DEBUG_PAYLOAD = false;
 window.PREVENT_SEND  = false;
@@ -23,7 +23,7 @@ Application.prototype.start = function(user, track) {
 
     var layout = (
         <SiteLayout>
-            <HomePage dispatcher={this.dispatcher} user={user} />
+            <Channels dispatcher={this.dispatcher} user={user} />
         </SiteLayout>
     );
 

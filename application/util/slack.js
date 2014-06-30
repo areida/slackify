@@ -61,6 +61,9 @@ var Mixin = module.exports = {
             return;
         }
 
+        if (this.state.editing)
+            return;
+
         if ( ! this.state.nowPlaying || this.state.nowPlaying.uri !== track.uri)
         {
             this.setState({nowPlaying : track});
@@ -81,9 +84,10 @@ var Mixin = module.exports = {
                     'json'
                 );
             }
-            else
+
+            if (window.DEBUG_PAYLOAD)
             {
-                console.log(this.props.localStorageKey, payload);
+                console.log(this.props.key, payload);
             }
         }
     }
