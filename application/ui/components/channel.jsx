@@ -62,29 +62,29 @@ module.exports = React.createClass({
         }
         else if (this.state.editing)
         {
-            children.push(<Input key='subdomain' ref='subdomain' label='Subdomain' value={this.state.subdomain} required={true} handleChange={this.handleSubdomainChange} />);
-            children.push(<Input key='token' ref='token' label='Token' value={this.state.token} required={true} handleChange={this.handleTokenChange} />);
-            children.push(<Select key='emoji' ref='emoji' label='Emoji' value={this.state.emoji} handleChange={this.handleEmojiChange} options={_.map(Emojis, this.getEmojiOption)} />);
+            children.push(<Input key='subdomain' className='subdomain' ref='subdomain' label='Subdomain' value={this.state.subdomain} required={true} handleChange={this.handleSubdomainChange} />);
+            children.push(<Input key='token' className='token' ref='token' label='Token' value={this.state.token} required={true} handleChange={this.handleTokenChange} />);
+            children.push(<Select key='emoji' className='emoji' ref='emoji' label='Emoji' value={this.state.emoji} handleChange={this.handleEmojiChange} options={_.map(Emojis, this.getEmojiOption)} />);
             children.push(
-                <p key='actions'>
-                    <i className='fa fa-times' onClick={this.handleDestroy} title='Delete' />
-                    <i className='fa fa-save' onClick={this.handleUpdate} title='Save' />
+                <p key='actions' className='actions'>
+                    <i className='destroy fa fa-times' onClick={this.handleDestroy} title='Delete' />
+                    <i className='save fa fa-save' onClick={this.handleUpdate} title='Save' />
                 </p>
             );
         }
         else
         {
-            children.push(<p key='subdomain'>Subdomain {this.state.subdomain}</p>);
-            children.push(<p key='token'>Token {this.state.token}</p>);
+            children.push(<p key='subdomain' className='subdomain'>Subdomain {this.state.subdomain}</p>);
+            children.push(<p key='token' className='token'>Token {this.state.token}</p>);
             children.push(
                 <p key='emoji' className='emoji'>
-                    Emoji <img src={Emojis[this.state.emoji]} title={this.state.emoji} />
+                    Emoji <img key='image' className='image' src={Emojis[this.state.emoji]} title={this.state.emoji} />
                 </p>
             );
             children.push(
-                <p key='actions'>
-                    <i key='mute' className={'fa ' + muteClass} onClick={this.handleMute} title={muteText} />
-                    <i key='edit' className='fa fa-pencil' onClick={this.handleEdit} title='Edit' />
+                <p key='actions' className='actions'>
+                    <i key='mute' className={'mute fa ' + muteClass} onClick={this.handleMute} title={muteText} />
+                    <i key='edit' className='edit fa fa-pencil' onClick={this.handleEdit} title='Edit' />
                 </p>
             );
         }

@@ -11,12 +11,12 @@ module.exports = React.createClass({
     render : function()
     {
         return (
-            <div>
-                <Header />
-                <div>
+            <div key='site' className='site'>
+                <Header key='header' />
+                <div key='main' className='main'>
                     {this.props.children}
                 </div>
-                <Footer />
+                <Footer key='footer' />
             </div>
         );
     }

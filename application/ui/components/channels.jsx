@@ -29,11 +29,11 @@ module.exports = React.createClass({
     render : function()
     {
         return (
-            <div>
-                <div className='controls'>
-                    <i className='fa fa-plus' onClick={this.addChannel} title='Add Channel' />
+            <div key='channels' className='channels'>
+                <div key='controls' className='controls'>
+                    <i key='add' className='fa fa-plus' onClick={this.addChannel} title='Add Channel' />
                 </div>
-                <div className='channels'>
+                <div key='list' className='list'>
                     {this.state.channels.map(this.getChannel)}
                 </div>
             </div>
@@ -43,7 +43,7 @@ module.exports = React.createClass({
     addChannel : function()
     {
         var channels = _.clone(this.state.channels),
-            key      = new Date().getTime() + '',
+            key      = 'channel-' + new Date().getTime(),
             self     = this;
 
         channels.push(key);
