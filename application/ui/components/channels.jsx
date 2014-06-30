@@ -4,8 +4,7 @@
 var React = require('react');
 var _     = require('underscore');
 
-var Button   = require('./buttons/button');
-var Channel  = require('./channel');
+var Channel = require('./channel');
 
 var DB = require('../../db/slackify-v1');
 
@@ -44,7 +43,7 @@ module.exports = React.createClass({
     addChannel : function()
     {
         var channels = _.clone(this.state.channels),
-            key      = new Date().getTime(),
+            key      = new Date().getTime() + '',
             self     = this;
 
         channels.push(key);

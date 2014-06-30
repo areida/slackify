@@ -62,9 +62,9 @@ module.exports = React.createClass({
         }
         else if (this.state.editing)
         {
-            children.push(<Input key='subdomain' label='Subdomain' value={this.state.subdomain} required={true} handleChange={this.handleSubdomainChange} />);
-            children.push(<Input key='token' label='Token' value={this.state.token} required={true} handleChange={this.handleTokenChange} />);
-            children.push(<Select key='emoji' label='Emoji' value={this.state.emoji} handleChange={this.handleEmojiChange} options={_.map(Emojis, this.getEmojiOption)} />);
+            children.push(<Input key='subdomain' ref='subdomain' label='Subdomain' value={this.state.subdomain} required={true} handleChange={this.handleSubdomainChange} />);
+            children.push(<Input key='token' ref='token' label='Token' value={this.state.token} required={true} handleChange={this.handleTokenChange} />);
+            children.push(<Select key='emoji' ref='emoji' label='Emoji' value={this.state.emoji} handleChange={this.handleEmojiChange} options={_.map(Emojis, this.getEmojiOption)} />);
             children.push(
                 <p key='actions'>
                     <i className='fa fa-times' onClick={this.handleDestroy} title='Delete' />
@@ -74,7 +74,6 @@ module.exports = React.createClass({
         }
         else
         {
-
             children.push(<p key='subdomain'>Subdomain {this.state.subdomain}</p>);
             children.push(<p key='token'>Token {this.state.token}</p>);
             children.push(
@@ -169,11 +168,17 @@ module.exports = React.createClass({
         if (this.isValid())
         {
             state.editing = false;
-
             this.db.update('channel', this.props.key, state, function() {
                 self.setState(state);
             }, function(event) {
-                console.log(event);
+                if (event.target.error.name === 'ConstraintError')
+                {
+                    self.refs.subdomain.setState({validated : 'This subdomain is in use'})
+                }
+                else
+                {
+                    console.log(event);
+                }
             });
         }
     },
