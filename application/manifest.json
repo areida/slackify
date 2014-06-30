@@ -7,11 +7,11 @@
     "en": "Share your tunes with your fellow slackers"
   },
   "AppIcon": {
-    "18x18": "img/icons/icon-18x18.png",
-    "32x32": "img/icons/icon-32x32.png",
-    "64x64": "img/icons/icon-64x64.png",
-    "128x128": "img/icons/icon-128x128.png",
-    "300x300": "img/icons/icon-300x300.png"
+    "18x18": "icons/icon-18x18.png",
+    "32x32": "icons/icon-32x32.png",
+    "64x64": "icons/icon-64x64.png",
+    "128x128": "icons/icon-128x128.png",
+    "300x300": "icons/icon-300x300.png"
   },
   "AcceptedLinkTypes": [
     "playlist"
