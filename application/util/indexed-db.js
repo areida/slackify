@@ -3,60 +3,19 @@
 var _          = require('underscore');
 var Extendable = require('synapse-common/lib/extendable');
 
+var DB = null;
+
 module.exports = Extendable.extend({
 
-    name    : null,
+    name    : '',
     tables  : [],
     version : 1,
-
-    db : null,
-
-    connect : function(callback)
-    {
-        var request,
-            self = this;
-
-        if (this.db)
-        {
-            callback(this.db);
-        }
-        else
-        {
-            request = indexedDB.open(this.name, this.version);
-            self    = this;
-
-            request.onupgradeneeded = function(event) {
-                var db = event.target.result;
-
-                _.each(self.tables, function(table) {
-                    var store;
-
-                    if (db.objectStoreNames.contains(table.name))
-                    {
-                        db.deleteObjectStore(table.name);
-                    }
-
-                    store = db.createObjectStore(table.name, {keyPath: table.key});
-                    
-                    _.each(table.indices, function(index) {
-                        store.createIndex('by_' + index.name, index.name, {unique: !! index.unique});
-                    });
-                });
-            };
-
-            request.onsuccess = function(event) {
-                this.db = event.target.result;
-
-                callback(this.db);
-            };
-        }
-    },
 
     'delete' : function(table, key, success, error)
     {
         var self = this;
 
-        this.connect(function(db) {
+        this._connect(function(db) {
             var trans   = self._startTransaction(db, 'readwrite'),
                 store   = trans.objectStore(table),
                 request = store.delete(key);
@@ -72,7 +31,7 @@ module.exports = Extendable.extend({
     {
         var self = this;
 
-        this.connect(function(db) {
+        this._connect(function(db) {
             var trans = self._startTransaction(db, 'readwrite'),
                 store = trans.objectStore(table);
 
@@ -91,7 +50,7 @@ module.exports = Extendable.extend({
     {
         var self = this;
 
-        this.connect(function(db) {
+        this._connect(function(db) {
             var trans   = self._startTransaction(db, 'readwrite'),
                 store   = trans.objectStore(table),
                 request = store.get(key);
@@ -111,7 +70,7 @@ module.exports = Extendable.extend({
     {
         var self = this;
 
-        this.connect(function(db) {
+        this._connect(function(db) {
             var trans   = self._startTransaction(db, 'readonly'),
                 store   = trans.objectStore(table),
                 range   = IDBKeyRange.lowerBound(0),
@@ -136,11 +95,55 @@ module.exports = Extendable.extend({
         this.insert(table, [values], complete, error);
     },
 
+    _connect : function(callback)
+    {
+        var request,
+            self = this;
+
+        if (DB)
+        {
+            callback(DB);
+        }
+        else
+        {
+            request = indexedDB.open(this.name, this.version);
+            self    = this;
+
+            request.onupgradeneeded = this._upgradeDatabase;
+
+            request.onsuccess = function(event) {
+                DB = event.target.result;
+
+                callback(DB);
+            };
+        }
+    },
+
     _startTransaction : function(db, mode)
     {
         var stores = _.pluck(this.tables, 'name');
 
         return db.transaction(stores, mode);
+    },
+
+    _upgradeDatabase : function(event)
+    {
+        var db = event.target.result;
+
+        _.each(this.tables, function(table) {
+            var store;
+
+            if (db.objectStoreNames.contains(table.name))
+            {
+                db.deleteObjectStore(table.name);
+            }
+
+            store = db.createObjectStore(table.name, {keyPath: table.key});
+            
+            _.each(table.indices, function(index) {
+                store.createIndex('by_' + index.name, index.name, {unique: !! index.unique});
+            });
+        });
     }
 
 });

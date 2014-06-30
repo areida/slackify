@@ -16,6 +16,6 @@ module.exports = IndexedDB.extend({
             unique : true
         }]
     }],
-    version : 7
+    version : 8
 
 });
