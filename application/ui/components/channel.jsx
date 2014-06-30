@@ -119,16 +119,22 @@ module.exports = React.createClass({
         this.setState({editing : true});
     },
 
-    handleEmojiChange : function(input, event)
+    handleDataChange : function(key, input)
     {
-        var formData = _.clone(this.state.formData);
+        var formData = _.clone(this.state.formData),
+            state    = _.clone(this.state);
 
-        formData['emoji'] = input;
+        formData[key] = input;
 
-        this.setState({
-            emoji    : input.value,
-            formData : formData
-        });
+        state.formData = formData;
+        state[key]     = input.value;
+
+        this.setState(state);
+    },
+
+    handleEmojiChange : function(input)
+    {
+        this.handleDataChange('emoji', input);
     },
 
     handleMute : function()
@@ -136,28 +142,14 @@ module.exports = React.createClass({
         this.setState({muted : ! this.state.muted});
     },
 
-    handleSubdomainChange : function(input, event)
+    handleSubdomainChange : function(input)
     {
-        var formData = _.clone(this.state.formData);
-
-        formData['subdomain'] = input;
-
-        this.setState({
-            formData  : formData,
-            subdomain : input.value
-        });
+        this.handleDataChange('subdomain', input);
     },
 
-    handleTokenChange : function(input, event)
+    handleTokenChange : function(input)
     {
-        var formData = _.clone(this.state.formData);
-
-        formData['token'] = input;
-
-        this.setState({
-            formData : formData,
-            token    : input.value
-        });
+        this.handleDataChange('token', input);
     },
 
     handleUpdate : function()
