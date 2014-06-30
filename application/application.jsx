@@ -18,7 +18,7 @@ function Application() {
     this.stores = {};
 }
 
-Application.prototype.start = function(user, track) {
+Application.prototype.start = function(user) {
     window.React = React;
 
     var layout = (
